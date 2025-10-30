@@ -98,6 +98,8 @@ def buy_now(request, book_id):
     book=get_object_or_404(Book, id=book_id)
 
     total_quantity = sum(item.quantity for item in cart_items)
+    # in production time
+    YOUR_DOMAIN = "https://deploy-django-on-railway.onrender.com"
 
     session=stripe.checkout.Session.create(
         payment_method_types=['card'],
@@ -115,8 +117,11 @@ def buy_now(request, book_id):
             }
         ],
         mode='payment',
-        success_url=request.build_absolute_uri(reverse('success')),
-        cancel_url=request.build_absolute_uri(reverse('cancel')),
+        # success_url=request.build_absolute_uri(reverse('success')),
+        # cancel_url=request.build_absolute_uri(reverse('cancel')),
+        #production
+        success_url=f"{YOUR_DOMAIN}/success/",
+        cancel_url=f"{YOUR_DOMAIN}/cancel/",
     )
     return redirect(session.url)    
 
