@@ -36,7 +36,7 @@ SECRET_KEY = 'django-insecure-47dtij)4@5$f)t28x9jbf36md689*0x_hd+nf)zc(atqb2jn40
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['deploy-django-on-railway.onrender.com', 'localhost']
 
 
 # Application definition
