@@ -1,0 +1,199 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Book{% endblock %}
+
+{% block extra_css %}
+<style>
+    body {
+  font-family: 'Poppins', sans-serif;
+  background: #f6f6f6;
+  color: #222;
+  margin: 0;
+  padding: 20px;
+}
+
+.book-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  gap: 25px;
+  margin-top: 20px;
+}
+
+.book-card {
+  background: white;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.book-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.book-image img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.book-info {
+  padding: 15px;
+}
+
+.book-info h3 {
+  margin: 5px 0;
+  font-size: 1.1rem;
+  color: #111;
+}
+
+.author {
+  color: #555;
+  font-size: 0.9rem;
+}
+
+.desc {
+  font-size: 0.85rem;
+  color: #777;
+  margin: 10px 0;
+}
+
+.price {
+  font-weight: bold;
+  color: #000;
+  margin: 8px 0;
+}
+
+.book-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.btn {
+  text-decoration: none;
+  padding: 8px 14px;
+  border-radius: 25px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  text-align: center;
+  display: inline-block;
+}
+
+.btn-primary {
+  background: #000;
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: #333;
+}
+
+.btn-outline {
+  border: 1px solid #000;
+  color: #000;
+}
+
+.btn-outline:hover {
+  background: #000;
+  color: #fff;
+}
+
+.btn-outline.danger {
+  border-color: #e00;
+  color: #e00;
+}
+
+.btn-outline.danger:hover {
+  background: #e00;
+  color: #fff;
+}
+
+.bottom-links {
+  margin-top: 30px;
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+}
+
+.no-books {
+  text-align: center;
+  font-size: 1.1rem;
+  margin-top: 40px;
+  color: #555;
+}
+/* 🛒 View Cart Button Style */
+.btn-cart {
+  display: inline-block;
+  background: linear-gradient(135deg, #000 0%, #222 100%);
+  color: #fff;
+  padding: 12px 32px;
+  border-radius: 50px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-decoration: none;
+  text-align: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
+  border: none;
+  margin-left: 85%;
+}
+
+/* Hover Effects */
+.btn-cart:hover {
+  transform: translateY(-3px) scale(1.05);
+  background: linear-gradient(135deg, #111 0%, #000 100%);
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.3);
+  color: #fff;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .btn-cart {
+    width: 100%;
+    padding: 14px 0;
+    font-size: 1rem;
+  }
+}
+
+
+</style>
+{% endblock %}
+
+{% block content %}
+ <a href="{% url 'view_cart' %}" class="btn-cart">🛒View Cart</a>
+<div class="book-container">
+    {% for i in book %}
+    <div class="book-card">
+        <div class="book-image">
+            {% if i.covers %}
+            <img src="{{ i.covers.url }}" alt="{{ i.name }}">
+            {% else %}
+            <span class="no-img">No Image</span>
+            {% endif %}
+        </div>
+        <div class="book-info">
+            <h3>{{ i.name }}</h3>
+            <p class="author">{{ i.author }}</p>
+            <p class="desc">{{ i.description|truncatewords:15 }}</p>
+            <p class="price">₹{{ i.price }}</p>
+            <div class="book-actions">
+                <a href="{% url 'updaet_book' i.id %}" class="btn btn-outline">Update</a>
+                <a href="{% url 'delete_book' i.id %}" class="btn btn-outline danger">Delete</a>
+            </div>
+            <a href="{% url 'add_to_cart' i.id %}" class="btn btn-primary">Add to Cart</a>
+        </div>
+    </div>
+    {% empty %}
+    <p class="no-books">No books available 😢</p>
+    {% endfor %}
+</div>
+
+<div class="bottom-links">
+    <a href="{% url 'add_book' %}" class="btn btn-primary">+ Add Book</a>
+    <a href="{% url 'logout_user' %}" class="btn btn-outline">Logout</a>
+</div>
+{% endblock %}

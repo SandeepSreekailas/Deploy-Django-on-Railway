@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container text-center py-5">
+    <div class="card shadow-lg border-0 p-4 mx-auto" style="max-width: 500px;">
+        <div class="mb-4">
+            <img src="{% static 'images/cancel.svg' %}" alt="Cancelled" style="width: 120px;">
+        </div>
+        <h1 class="text-danger fw-bold mb-3">❌ Payment Cancelled</h1>
+        <p class="text-muted mb-4">No worries~ You can try again or go back to your cart, okay~?</p>
+
+        <div class="d-flex justify-content-center gap-3 flex-wrap">
+            <a href="{% url 'view_cart' %}" class="btn btn-warning px-4">🛒 Back to Cart</a>
+            <a href="{% url 'home' %}" class="btn btn-outline-danger px-4">🏠 Return to Home</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

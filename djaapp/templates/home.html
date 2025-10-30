@@ -1,0 +1,172 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Home{% endblock %}
+
+{% block extra_css %}
+<style>
+/* === Home Page - Adidas Inspired Responsive Style === */
+
+/* Full-page layout setup */
+html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Navbar should stay at the top */
+nav {
+    flex-shrink: 0;
+}
+
+/* Middle hero fills the space */
+.home-hero {
+    flex: 1;
+    background: linear-gradient(to bottom right, #fff, #f4f4f4);
+    color: #111;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    padding: 5rem 2rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    
+    /* make content center vertically */
+    display: flex;
+    
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Footer stays at the bottom */
+footer {
+    flex-shrink: 0;
+    text-align: center;
+    padding: 1rem;
+    background: #000;
+    color: #fff;
+}
+
+/* Heading & Text */
+.home-hero h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+}
+
+.home-hero p {
+    font-size: 1.2rem;
+    color: #333;
+    margin-bottom: 2rem;
+}
+
+/* Buttons */
+.home-hero .btn {
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 1px;
+    padding: 12px 6px;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+    margin: 0.3rem auto; /* centers button block horizontally */
+    width: 20%;
+    text-align: center;
+    text-decoration: none;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.home-hero .btn-dark {
+    background-color: #000;
+    color: #fff;
+}
+
+.home-hero .btn-outline-dark {
+    border: 2px solid #000;
+    color: #000;
+}
+
+.home-hero .btn:hover {
+    transform: translateY(-3px);
+    opacity: 0.9;
+}
+
+/* === Responsive Design === */
+
+/* Tablets */
+@media (max-width: 992px) {
+    .home-hero {
+        padding: 4rem 1.5rem;
+    }
+
+    .home-hero h1 {
+        font-size: 2.5rem;
+    }
+
+    .home-hero p {
+        font-size: 1.1rem;
+    }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .home-hero {
+        padding: 3rem 1rem;
+    }
+
+    .home-hero h1 {
+        font-size: 2rem;
+        letter-spacing: 1px;
+    }
+
+    .home-hero p {
+        font-size: 1rem;
+    }
+
+    .home-hero .btn {
+        display: block;
+        width: 100%;
+        max-width: 250px;
+        margin: 0.5rem auto;
+    }
+}
+
+/* Tiny Phones */
+@media (max-width: 480px) {
+    .home-hero {
+        border-radius: 0;
+        box-shadow: none;
+        padding: 2.5rem 0.5rem;
+    }
+
+    .home-hero h1 {
+        font-size: 1.6rem;
+    }
+
+    .home-hero p {
+        font-size: 0.95rem;
+    }
+}
+
+
+
+</style>
+{% endblock %}
+
+{% block content %}
+
+<div class="home-hero">
+    <h1>Welcome to Home Page</h1>
+    <p>Step into the world of woodcrafts — elegant, bold, and crafted with passion.</p>
+
+    <a href="{% url 'view_book' %}" class="btn btn-dark">View Books</a>
+    <a href="{% url 'reg_user' %}" class="btn btn-outline-dark">Register</a>
+    <a href="{% url 'login_user' %}" class="btn btn-outline-dark">Login</a>
+</div>
+
+
+{% endblock %}

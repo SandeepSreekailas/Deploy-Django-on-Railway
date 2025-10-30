@@ -1,0 +1,134 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Your Cart{% endblock %}
+
+{% block extra_css %}
+<style>
+/* === CART PAGE - ADIDAS INSPIRED === */
+
+.cart-list {
+  list-style: none;
+  padding: 0;
+  margin: 3rem auto;
+  max-width: 700px;
+}
+
+.cart-item {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  padding: 1.2rem 1.5rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.cart-info {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #111;
+}
+
+.cart-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 0.5rem;
+}
+
+/* Buttons */
+.btn-remove, .btn-buy {
+  text-decoration: none;
+  padding: 10px 22px;
+  border-radius: 50px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  letter-spacing: 0.5px;
+}
+
+.btn-remove {
+  background: #ff4d4d;
+  color: #fff;
+  border: none;
+}
+
+.btn-remove:hover {
+  background: #e63946;
+  transform: translateY(-2px);
+}
+
+.btn-buy {
+  background: #0070f3;
+  color: #fff;
+  border: none;
+}
+
+.btn-buy:hover {
+  background: #0059c9;
+  transform: translateY(-2px);
+}
+
+/* Total */
+.cart-total {
+  text-align: center;
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-top: 2rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .cart-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .cart-actions {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .btn-remove, .btn-buy {
+    width: 48%;
+    text-align: center;
+  }
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container text-center">
+  <h1 class="mb-4 fw-bold">🛍️ Your Shopping Cart</h1>
+
+  {% if cart_items %}
+  <ul class="cart-list">
+    {% for item in cart_items %}
+    <li class="cart-item">
+      <div class="cart-info">
+        <strong>{{ item.book.name }}</strong> (x{{ item.quantity }}) — Rs. {{ item.book.price }}
+      </div>
+
+      <div class="cart-actions">
+        <a href="{% url 'remove_from_cart' item.book.id %}" class="btn-remove">Remove</a>
+        <a href="{% url 'buy_now' item.book.id %}" class="btn-buy">Buy Now</a>
+      </div>
+    </li>
+    {% endfor %}
+  </ul>
+
+  <h3 class="cart-total">Total: Rs. {{ totel_price }}</h3>
+
+  <div class="mt-4">
+    <a href="{% url 'view_book' %}" class="btn btn-outline-dark rounded-pill px-4 py-2">
+      ← Continue Shopping
+    </a>
+  </div>
+
+  {% else %}
+  <p class="fs-4 mt-5">Your cart is empty... 😢</p>
+  <a href="{% url 'view_book' %}" class="btn btn-dark rounded-pill px-4 py-2">Shop Now</a>
+  {% endif %}
+</div>
+{% endblock %}

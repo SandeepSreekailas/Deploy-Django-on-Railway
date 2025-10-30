@@ -1,0 +1,56 @@
+/* === Global Adidas-inspired styling === */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #fff;
+    color: #111;
+    margin: 0;
+    padding: 0;
+}
+
+/* Navbar */
+.navbar {
+    background-color: #000 !important;
+}
+
+.navbar-brand {
+    font-weight: 800;
+    font-size: 1.3rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.nav-link {
+    color: #ddd !important;
+    margin: 0 10px;
+    transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+    color: #fff !important;
+    transform: scale(1.1);
+}
+
+/* Buttons */
+.btn-dark {
+    background-color: #000;
+    border: none;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.btn-dark:hover {
+    background-color: #222;
+}
+
+/* Footer */
+footer {
+    background-color: #f9f9f9;
+}
+
+/* Headings */
+h1, h2, h3, h4 {
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
