@@ -49,6 +49,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'djaapp',
+    'cloudinary',
+    'cloudinary_storage',
 ]
 
 MIDDLEWARE = [
@@ -160,8 +162,19 @@ STATICFILES_DIRS=[ BASE_DIR / 'static' ]
 STATIC_ROOT = BASE_DIR / 'staticfiles'  
 
 
-MEDIA_URL='/media/'
-MEDIA_ROOT=BASE_DIR / 'media'
+# MEDIA_URL='/media/'
+# MEDIA_ROOT=BASE_DIR / 'media'
+
+
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': os.getenv('CLOUDINARY_CLOUD_NAME'),
+    'API_KEY': os.getenv('CLOUDINARY_API_KEY'),
+    'API_SECRET': os.getenv('CLOUDINARY_API_SECRET'),
+
+}
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 
 # Default primary key field type
