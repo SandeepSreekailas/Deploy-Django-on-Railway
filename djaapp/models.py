@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from cloudinary.models import CloudinaryField
 # Create your models here.
 
 class Book(models.Model):
@@ -7,7 +8,8 @@ class Book(models.Model):
     author=models.CharField(max_length=100)
     description=models.TextField()
     price=models.DecimalField(max_digits=6, decimal_places=2)
-    covers=models.ImageField(upload_to="covers", null=True, blank=True)
+    # covers=models.ImageField(upload_to="covers", null=True, blank=True)
+    covers = CloudinaryField('image', blank=True, null=True)
     
 
     def __str__(self):
